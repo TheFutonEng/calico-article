@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: http-echo-server
+  namespace: default
+  labels:
+    app: http-echo-server
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: http-echo-server
+  template:
+    metadata:
+      labels:
+        app: http-echo-server
+    spec:
+      containers:
+      - image: mendhak/http-https-echo
+        imagePullPolicy: Always
+        name: http-echo-server
+        ports:
+        - containerPort: 80
+          name: 80tcp01
+          protocol: TCP
+        - containerPort: 443
+          name: 443tcp01
+          protocol: TCP

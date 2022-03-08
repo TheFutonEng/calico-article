@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: http-echo-server
+  labels:
+    app: http-echo-server
+  annotations:
+    metallb.universe.tf/address-pool: default
+  namespace: default
+spec:
+  ports: 
+  - port: 80
+    protocol: TCP
+    name: 80tcp
+    targetPort: 8080
+  - port: 443
+    protocol: TCP
+    name: 443tcp
+    targetPort: 8443
+  selector:
+    app: http-echo-server
+  type: LoadBalancer
